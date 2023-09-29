@@ -8,9 +8,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen.jsx";
 import LoginScreen from "./screens/LoginScreen.jsx";
 import RegisterScreen from "./screens/RegisterScreen.jsx";
-
-import { AuthProvider } from "./contexts/authContext.jsx";
 import Logout from "./components/Logout.jsx";
+
+import { Provider } from "react-redux";
+import store from "./store.js";
+import Profile from "./components/Profile.jsx";
 const router = createBrowserRouter([
 	{
 		path: "/",
@@ -33,13 +35,17 @@ const router = createBrowserRouter([
 				path: "/logout",
 				element: <Logout />,
 			},
+			{
+				path: "/profile",
+				element: <Profile />,
+			},
 		],
 	},
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
-	<React.StrictMode>
-		<AuthProvider>
+	<Provider store={store}>
+		<React.StrictMode>
 			<RouterProvider router={router} />
-		</AuthProvider>
-	</React.StrictMode>
+		</React.StrictMode>
+	</Provider>
 );

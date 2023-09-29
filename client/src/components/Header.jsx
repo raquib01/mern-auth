@@ -2,9 +2,9 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { LinkContainer } from "react-router-bootstrap";
-import { useAuth } from "../contexts/authContext";
+import {useSelector} from 'react-redux';
 function Header() {
-	const auth = useAuth();
+	const username = useSelector(state=>state.auth.userInfo?.name);
 	return (
 		<Navbar expand="lg" className="bg-body-tertiary">
 			<Container>
@@ -49,14 +49,14 @@ function Header() {
 							</Nav.Link>
 						</LinkContainer>
 					</Nav>
-					{auth.isLoggedIn ? (
+					{username && 
 						<Navbar.Text>
 							Signed in as:{" "}
 							<LinkContainer to="/profile">
-								<a>{auth.user}</a>
+								<a>{username}</a>
 							</LinkContainer>
 						</Navbar.Text>
-					) : null}
+						}
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>
