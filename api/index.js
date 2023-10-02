@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require('path');
 const dotenv = require("dotenv");
 dotenv.config();
 const authRoutes = require("./routes/authRoutes");
@@ -26,6 +27,17 @@ app.use(express.json());
 
 // routing
 app.use("/api/auth", authRoutes);
+
+// static file
+if (process.env.NODE_ENV === "production") {
+	// serving static file
+	app.use(express.static(path.join(__dirname, "..", "client", "dist")));
+
+	// serving react app for all routes
+	app.get("*", (req, res) => {
+		res.sendFile(path.join(__dirname, "..", "client", "dist", "index.html"));
+	});
+}
 
 // 404 Handler
 app.use((req, res) => {
