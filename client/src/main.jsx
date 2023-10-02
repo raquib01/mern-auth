@@ -13,6 +13,7 @@ import Logout from "./components/Logout.jsx";
 import { Provider } from "react-redux";
 import store from "./store.js";
 import Profile from "./components/Profile.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 const router = createBrowserRouter([
 	{
 		path: "/",
@@ -36,8 +37,14 @@ const router = createBrowserRouter([
 				element: <Logout />,
 			},
 			{
-				path: "/profile",
-				element: <Profile />,
+				path: "",
+				element: <ProtectedRoute />,
+				children: [
+					{
+						path: "/profile",
+						element: <Profile />,
+					},
+				],
 			},
 		],
 	},

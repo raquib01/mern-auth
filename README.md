@@ -1,2 +1,2 @@
 # MERN AUTH
-- User Authentication using MERN Stack
+This Web App is dedicated to MERN Authentication. It performs Registration and Authentication of the user. It Stores JWT Token in Http Only Cookies. It also uses Redux Toolkit and React Bootstrap Library
